@@ -66,7 +66,20 @@ module.exports = {
           'postcss-loader', // 处理**css**时自动加前缀
           'less-loader' // 把**less**编译为**css**
         ]
-      }
+      },
+      // 处理图片文件
+      {
+        test:/.(png|jpg|jpeg|gif|svg)$/, // 匹配图片文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/images/[name][ext]', // 文件输出目录和命名
+        },
+      },
     ]
   },
   resolve: {
