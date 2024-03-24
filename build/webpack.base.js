@@ -20,7 +20,9 @@ module.exports = {
       {
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
         // **babel.config.js**是**babel-loader**的配置文件,会自动读取配置
-        use: 'babel-loader'
+        // thread-loader开启多线程也是需要启动时间,大约**600ms**左右,所以适合规模比较大的项目。
+        // thread-loader放置在其他 **loader** 之前。放置在此 **loader** 之后的 **loader** 会在一个独立的 **worker** 池中运行
+        use: ['thread-loader', 'babel-loader']
         // use: {
         //   loader: 'babel-loader',
         //   options: {
@@ -122,5 +124,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV)
     })
-  ]
+  ],
+  cache: {
+    // 第二次打包,通过对文件做哈希对比来验证文件前后是否一致,如果一致则采用上一次的缓存
+    type: 'filesystem', // 使用文件缓存
+  }
 }
