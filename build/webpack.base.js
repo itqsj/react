@@ -112,6 +112,10 @@ module.exports = {
   resolve: {
     // 在引入模块时不带文件后缀时，会来该配置数组里面依次添加后缀查找文件
     extensions: ['.js', '.tsx', '.ts'],
+    // 配置alias别名
+    alias: {
+      '@': path.join(__dirname, '../src')
+    }
   },
   plugins: [
     // **webpack**需要把最终构建好的静态资源都引入到一个**html**文件中,这样才能在浏览器中运行
