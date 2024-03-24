@@ -20,5 +20,7 @@ module.exports = merge(baseConfig, {
         },
       ],
     }),
-  ]
+  ],
+  // 调试希望看到源代码,而不是编译后的代码(生产希望是编译后的代码)
+  // devtool: 'eval-cheap-module-source-map'
 })
