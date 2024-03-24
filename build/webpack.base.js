@@ -16,6 +16,7 @@ module.exports = {
   },
   module: {
     rules: [
+      // **loader**执行顺序是从右往左,从下往上（下方的use）
       {
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
         use: {
@@ -23,11 +24,29 @@ module.exports = {
           options: {
             // 预设执行顺序由右往左,所以先处理ts,再处理jsx
             presets: [
-              '@babel/preset-react',
-              '@babel/preset-typescript'
+              '@babel/preset-react', // 识别**jsx**语法
+              '@babel/preset-typescript' // **ts**语法转换为 **js**
             ]
           }
         }
+      },
+      {
+        test: /.(css|less)$/, //匹配 css和less 文件
+        use: [
+          'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
+          'css-loader', // 解析**css**文件代码
+          // {
+          //   loader: 'postcss-loader', // 处理**css**时自动加前缀
+          //   options: {
+          //     postcssOptions: {
+          //       plugins: ['autoprefixer'] // 决定添加哪些浏览器前缀到**css**中
+          //     }
+          //   }
+          // },
+          // **postcss.config.js**是**postcss-loader**的配置文件,会自动读取配置
+          'postcss-loader', // 处理**css**时自动加前缀
+          'less-loader' // 把**less**编译为**css**
+        ]
       }
     ]
   },
