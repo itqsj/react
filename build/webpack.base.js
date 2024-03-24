@@ -19,17 +19,36 @@ module.exports = {
       // **loader**执行顺序是从右往左,从下往上（下方的use）
       {
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
-        use: {
-          loader: 'babel-loader',
-          options: {
-            // 预设执行顺序由右往左,所以先处理ts,再处理jsx
-            presets: [
-              '@babel/preset-react', // 识别**jsx**语法
-              '@babel/preset-typescript' // **ts**语法转换为 **js**
-            ]
-          }
-        }
+        // **babel.config.js**是**babel-loader**的配置文件,会自动读取配置
+        use: 'babel-loader'
+        // use: {
+        //   loader: 'babel-loader',
+        //   options: {
+        //     // 预设执行顺序由右往左,所以先处理ts,再处理jsx
+        //     presets: [
+        //       [
+        //         "@babel/preset-env", // **babel** 编译的预设,可以转换目前最新的**js**标准语法
+        //         {
+        //           // 设置兼容目标浏览器版本,这里可以不写,babel-loader会自动寻找上面配置好的文件.browserslistrc
+        //           // "targets": {
+        //           //  "chrome": 35,
+        //           //  "ie": 9
+        //           // },
+        //           "useBuiltIns": "usage", // 根据配置的浏览器兼容,以及代码中使用到的api进行引入polyfill按需添加
+        //           "corejs": 3, // 配置使用core-js低版本
+        //         }
+        //       ],
+        //       '@babel/preset-react', // 识别**jsx**语法
+        //       '@babel/preset-typescript' // **ts**语法转换为 **js**
+        //     ]
+        //   }
+        // }
       },
+      // 如果node_moduels中也有要处理的语法，可以把js|jsx文件配置加上
+      // {
+      //  test: /.(js|jsx)$/,
+      //  use: 'babel-loader'
+      // }
       {
         test: /.(css|less)$/, //匹配 css和less 文件
         use: [
