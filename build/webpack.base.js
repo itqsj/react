@@ -137,7 +137,9 @@ module.exports = {
     // 配置alias别名
     alias: {
       '@': path.join(__dirname, '../src')
-    }
+    },
+    // 如果用的是pnpm 就暂时不要配置这个，会有幽灵依赖的问题，访问不到很多模块。
+     modules: [path.resolve(__dirname, '../node_modules')], // 查找第三方模块只在本项目的node_modules中查找
   },
   plugins: [
     // **webpack**需要把最终构建好的静态资源都引入到一个**html**文件中,这样才能在浏览器中运行
