@@ -16,5 +16,9 @@ module.exports = {
     ],
     "@babel/preset-react", // 识别**jsx**语法
     "@babel/preset-typescript" // **ts**语法转换为 **js**
+  ],
+  "plugins": [
+    // 识别装饰器语法
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
 }
