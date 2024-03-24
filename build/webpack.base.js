@@ -18,6 +18,8 @@ module.exports = {
     rules: [
       // **loader**执行顺序是从右往左,从下往上（下方的use）
       {
+        // exclude: [path.resolve(__dirname, '../node_modules')],
+        include: [path.resolve(__dirname, '../src')], // 只对项目src文件的ts,tsx进行loader解析(缩小loader作用范围)
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
         // **babel.config.js**是**babel-loader**的配置文件,会自动读取配置
         // thread-loader开启多线程也是需要启动时间,大约**600ms**左右,所以适合规模比较大的项目。
