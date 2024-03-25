@@ -58,7 +58,7 @@ module.exports = {
       // }
       // test: /.(css|less)$/, //匹配 css和less 文件(css和less可以合并为一起，但是避免使用无用的**loader**解析来提升构建速度因此拆开)
       {
-        test: /.\css$/, //匹配 css和less 文件
+        test: /\.css$/, //匹配所有的 css 文件
         include: [path.resolve(__dirname, '../src')],
         use: [
           // 'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
