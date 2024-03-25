@@ -1,11 +1,8 @@
 import React from 'react'
-import './app.less'
-import Class from './components/Class'
+
+import { Demo } from '@/components'
 
 function App() {
-  return <div>
-    <h2>webpack5-react-ts</h2>
-    <Class></Class>
-  </div>
+  return <Demo></Demo>
 }
 export default App
