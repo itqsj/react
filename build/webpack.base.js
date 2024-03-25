@@ -2,9 +2,12 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-console.log('NODE_ENV', process.env.NODE_ENV)
-console.log('BASE_ENV', process.env.BASE_ENV)
+const isDev = process.env.NODE_ENV === 'development' // 是否是开发模式
+
+console.log('NODE_ENV', process.env.NODE_ENV, isDev)
+console.log('BASE_ENV', process.env.BASE_ENV, isDev)
 module.exports = {
   entry: path.join(__dirname, '../src/index.tsx'), // 入口文件
   // 打包文件出口
@@ -58,7 +61,8 @@ module.exports = {
         test: /.\css$/, //匹配 css和less 文件
         include: [path.resolve(__dirname, '../src')],
         use: [
-          'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
+          // 'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
+          (isDev ? 'style-loader' : MiniCssExtractPlugin.loader), // 开发环境使用style-looader,打包模式抽离css
           'css-loader', // 解析**css**文件代码
           // {
           //   loader: 'postcss-loader', // 处理**css**时自动加前缀
@@ -76,7 +80,8 @@ module.exports = {
         test: /.\less$/, //匹配 css和less 文件
         include: [path.resolve(__dirname, '../src')],
         use: [
-          'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
+          // 'style-loader', // 把解析后的**css**代码从**js**中抽离,放到头部的**style**标签中(在运行时做的)
+          (isDev ? 'style-loader' : MiniCssExtractPlugin.loader), // 开发环境使用style-looader,打包模式抽离css
           'css-loader', // 解析**css**文件代码
           // {
           //   loader: 'postcss-loader', // 处理**css**时自动加前缀
