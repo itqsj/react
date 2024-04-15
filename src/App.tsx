@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Demo } from '@/components'
+import IndexRouter from '@/router'
 
 function App() {
-  return <Demo></Demo>
+  return <IndexRouter></IndexRouter>
 }
 export default App

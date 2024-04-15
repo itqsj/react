@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const LazyDemo = lazy(() => import('@/components/demo/LazyDemo')) // 使用import语法配合react的Lazy动态引入资源
 import Class from '@/components/demo/Class'
@@ -20,6 +21,9 @@ import '@/app.less'
 
 function Demo() {
   const [show, setShow] = useState(false)
+  const [search] = useSearchParams()
+  console.log(search.get('aa'));
+  
 
   // 点击事件中动态引入css, 设置show为true
   const onClick = () => {
